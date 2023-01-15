@@ -9,11 +9,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        type: Sequelize.INTEGER
-      },
       content: {
         type: Sequelize.TEXT
+      },
+      post_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model:"Post",
+          key:"id"
+        }
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model:"User",
+          key:"id"
+        }
       },
       created_at: {
         allowNull: false,
