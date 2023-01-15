@@ -17,6 +17,14 @@ module.exports = (sequelize, DataTypes) => {
 
       // One user can have Many Comments (1-M)
       this.hasMany(models.comment, {foreignKey: "postId"})
+
+      // User can like many posts
+      this.belongsToMany(models.post, {
+        through: "Likes",
+        as: "favorites",
+        foreignKey: "userId",
+        timestamps: false,
+      })
     }
   }
   User.init({
