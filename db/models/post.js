@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.user, { foreignKey: "userId", as: "author" });
 
       // One post can have many comments (1-M)
-      this.hasMany(models.comment, { foreignKey: "postId"});
+      this.hasMany(models.comment, { foreignKey: "postId" });
 
       // Tag list
       this.belongsToMany(models.tag, {
@@ -26,14 +26,12 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false,
       });
 
-      // Likes
+      // Favorites
       this.belongsToMany(models.user, {
-        through: "Likes",
+        through: "Favorites",
         foreignKey: "postId",
         timestamps: false,
       });
-    }
-
     }
   }
   Post.init({
