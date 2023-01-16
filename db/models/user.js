@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => {
       // One user can have Many Comments (1-M)
       this.hasMany(models.Comment, {foreignKey: "postId"})
 
-      // User can like many posts
+      // User can favorite many posts
       this.belongsToMany(models.Post, {
-        through: "Likes",
+        through: "Favorites",
         as: "favorites",
         foreignKey: "userId",
         timestamps: false,
