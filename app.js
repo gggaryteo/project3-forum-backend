@@ -4,7 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 // import models
-const db = require('./models');
+const db = require('./db/models');
 const {user, post, tag, comment } = db;
 
 // Putting express & cors together below this line

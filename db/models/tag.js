@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // One post can have many Tags
-      this.belongsToMany(models.post, {
+      this.belongsToMany(models.Post, {
         through: "TagList",
         foreignKey: "tagName",
         timestamps: false,
