@@ -13,17 +13,23 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       // One user can have Many Posts (1-M)
-      this.hasMany(models.Post, {foreignKey: "userId"});
+      this.hasMany(models.Post, {foreignKey: "user_id"});
 
       // One user can have Many Comments (1-M)
-      this.hasMany(models.Comment, {foreignKey: "postId"})
+      this.hasMany(models.Comment, {foreignKey: "post_id"})
 
       // User can favorite many posts
       this.belongsToMany(models.Post, {
         through: "Favorites",
         as: "favorites",
-        foreignKey: "userId",
+        foreignKey: "user_id",
         timestamps: false,
+      })
+
+      this.belongsToMany(models.Post, {
+        through: "Users_Likes",
+        foreignKey: "user_id",
+        timestamps: false
       })
     }
   }

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // One post can have many Tags
       this.belongsToMany(models.Post, {
         through: "TagList",
-        foreignKey: "tagName",
+        foreignKey: "tag_name",
         timestamps: false,
       })
     }
