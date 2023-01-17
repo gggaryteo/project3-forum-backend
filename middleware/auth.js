@@ -1,6 +1,6 @@
-const { NotFoundError } = require("../helpers/customErrors");
+const { NotFoundError } = require("../helpers/customError");
 const { jwtVerify } = require("../helpers/jwt");
-const { user: UserModel } = require("../db/models");
+const { User } = require("../db/models");
 
 const verifyToken = async (req, res, next) => {
   try {
@@ -13,7 +13,7 @@ const verifyToken = async (req, res, next) => {
     const userVerified = await jwtVerify(token);
     if (!userVerified) throw new Error("Invalid Token");
 
-    req.loggedUser = await UserModel.findOne({
+    req.loggedUser = await User.findOne({
       attributes: { exclude: ["email"] },
       where: { email: userVerified.email },
     });
