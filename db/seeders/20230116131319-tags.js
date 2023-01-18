@@ -16,6 +16,31 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
         },
+        {
+          tag_name: "Chinese New Year",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          tag_name: "Singapore",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          tag_name: "Rekt",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          tag_name: "SG Snowing",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          tag_name: "Yishun",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
       ],
       {}
     );
