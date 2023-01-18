@@ -2,6 +2,11 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const io = require("socket.io")(3002, {
+  cors: {
+    origin: ["http://localhost:3000"],
+  }
+})
 
 // import middlewares
 const errorHandler = require("./middleware/errorHandler");
@@ -29,6 +34,15 @@ const PORT = process.env.PORT || 3001;
 app.use("/api/users", usersRoutes);
 app.use("/api/user", userRoutes);
 app.use(errorHandler);
+
+// Socket.io
+io.on('connection', socket => {
+  console.log(socket.id)
+  socket.on('send-message', (message) => {
+    console.log(message)
+    socket.broadcast.emit('receive-message', message)
+  })
+})
 
 
 app.listen(PORT, () => {
