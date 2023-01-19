@@ -48,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.TEXT
   }, {
     sequelize,
+    tableName: 'Posts',
     modelName: 'Post',
     underscored: true,
   });

@@ -13,6 +13,7 @@ const { User, Post, Tag, Comment } = db;
 // import routers
 const usersRoutes = require("./routers/users");
 const userRoutes = require("./routers/user");
+const postsRoutes = require("./routers/posts")
 
 
 // Putting express & cors together below this line
@@ -28,6 +29,7 @@ const PORT = process.env.PORT || 3001;
 // Routes
 app.use("/api/users", usersRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/posts", postsRoutes);
 app.use(errorHandler);
 
 
