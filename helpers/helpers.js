@@ -9,4 +9,4 @@ const appendTagList = (postTags, post) => {
   post.dataValues.tagList = tagList;
 };
 
-module.exports = { slugify, appendTagList, appendFavorites, appendFollowers };
+module.exports = { slugify, appendTagList };
