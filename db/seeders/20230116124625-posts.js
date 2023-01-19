@@ -12,7 +12,7 @@ module.exports = {
           description: "Journey to learn about apples",
           content:
             "Apples can be sorted into types by sweetness, peel color, date discovered, ripening season, geographical origin, and/or how best to use them. There are red apples and green apples, sweet apples and tart apples, dry apples and juicy apples, apples best eaten fresh off the tree, and types of apples that are best baked into a yummy dessert. There are ancient heirloom varieties and brand-new modern introductions. There are hundreds of different kinds of apples!",
-          user_id: "13",
+          user_id: "1",
           likes_counter: 0,
           created_at: new Date(),
           updated_at: new Date(),
@@ -25,7 +25,7 @@ module.exports = {
 “Life is full of banana skins. You slip, you carry on.” ~ Daphne Guinness
 “Time flies like an arrow; fruit flies like a banana” ~ Groucho Marx
 “My mother always used to say: ‘The older you get, the better you get, unless you’re a banana.'” ~ Betty White`,
-          user_id: "14",
+          user_id: "2",
           likes_counter: 0,
           created_at: new Date(),
           updated_at: new Date(),
