@@ -13,7 +13,7 @@ const errorHandler = require("./middleware/errorHandler");
 
 // import models
 const db = require('./db/models');
-const { User, Post, Tag, Comment } = db;
+const { User, Post, Tag, Comment, Chats } = db;
 
 // import routers
 const usersRoutes = require("./routers/users");
@@ -36,11 +36,19 @@ app.use("/api/user", userRoutes);
 app.use(errorHandler);
 
 // Socket.io
-io.on('connection', socket => {
+io.on('connection', async (socket) => {
   console.log(socket.id)
-  socket.on('send-message', (message) => {
-    console.log(message)
-    socket.broadcast.emit('receive-message', message)
+  const currentChat = await Chats.findAll()
+  socket.emit('retrive-chat', currentChat)
+
+  socket.on('send-message', async (message, username) => {
+    console.log(message, username)
+    // ChatController(Chats).addMessage
+    await Chats.create({
+      message,
+      user: username
+    })
+    socket.broadcast.emit('receive-message', message, username)
   })
 })
 
