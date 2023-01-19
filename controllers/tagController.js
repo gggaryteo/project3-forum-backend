@@ -5,9 +5,11 @@ class PostController extends BaseController {
     super(model);
   }
 
-  async getAllPost(req, res) {
+  async getAllTag(req, res) {
     try {
-      const posts = await this.model.findAll();
+      const posts = await this.model.findAll({
+        attributes: ["tag_name"],
+      });
       return res.json(posts);
     } catch (err) {
       console.log(err);
