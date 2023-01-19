@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Tag extends Model {
     /**
@@ -16,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         through: "TagList",
         foreignKey: "tagName",
         timestamps: false,
-      })
+      });
     }
   }
   Tag.init({
