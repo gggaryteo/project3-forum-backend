@@ -12,27 +12,23 @@ module.exports = (sequelize, DataTypes) => {
       // One post can have many Tags
       this.belongsToMany(models.Post, {
         through: "TagList",
-        foreignKey: "tag_name",
+        foreignKey: "tagName",
         timestamps: false,
       });
     }
   }
-  Tag.init(
-    {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        primaryKey: true,
-      },
+  Tag.init({
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
     },
-    {
-      sequelize,
-      modelName: "Tag",
-      underscored: true,
-      tableName: "Tags",
-
-      timestamps: false,
-    }
-  );
+  }, {
+    sequelize,
+    tableName: 'Tags',
+    modelName: 'Tag',
+    underscored: true,
+    timestamps: false,
+  });
   return Tag;
 };

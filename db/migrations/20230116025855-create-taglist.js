@@ -9,11 +9,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tag_id: {
-        type: Sequelize.INTEGER,
+      tag_name: {
+        type: Sequelize.STRING,
         references: {
           model: "Tags",
-          key: "id",
+          key: "name",
         },
       },
       post_id: {
@@ -24,11 +24,11 @@ module.exports = {
         },
       },
       created_at: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE,
       },
       updated_at: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE,
       },
     });

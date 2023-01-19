@@ -23,6 +23,7 @@ const usersRoutes = require("./routers/users");
 const userRoutes = require("./routers/user");
 const PostRouter = require("./routers/postRouter");
 const TagRouter = require("./routers/tagRouter");
+const postsRoutes = require("./routers/posts")
 
 // initialize routers // Have not put in AUTH yet
 const postRouter = new PostRouter(postController).routes();
@@ -42,6 +43,7 @@ app.use("/api/users", usersRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRouter);
 app.use("/api/tag", tagRouter);
+app.use("/api/posts", postsRoutes);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
