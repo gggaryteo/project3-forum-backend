@@ -18,10 +18,12 @@ const { User, Post, Tag, Comment, Chats } = db;
 //import controllers
 const PostController = require("./controllers/postController");
 const TagController = require("./controllers/tagController");
+const ChatController = require('./controllers/chatController')
 
 // initialize controllers
 const postController = new PostController(Post);
 const tagController = new TagController(Tag);
+const chatController = new ChatController(Chats) 
 
 // import routers
 const usersRoutes = require("./routers/users");
@@ -29,10 +31,12 @@ const userRoutes = require("./routers/user");
 const PostRouter = require("./routers/postRouter");
 const TagRouter = require("./routers/tagRouter");
 const postsRoutes = require("./routers/posts")
+const ChatRouter = require("./routers/chatRouter")
 
 // initialize routers // Have not put in AUTH yet
 const postRouter = new PostRouter(postController).routes();
 const tagRouter = new TagRouter(tagController).routes();
+const chatRouter = new ChatRouter(chatController).routes()
 
 // Putting express & cors together below this line
 const app = express();
@@ -49,17 +53,17 @@ app.use("/api/user", userRoutes);
 app.use("/api/post", postRouter);
 app.use("/api/tag", tagRouter);
 app.use("/api/posts", postsRoutes);
+app.use("/api/chat", chatRouter);
 app.use(errorHandler);
 
 // Socket.io
 io.on('connection', async (socket) => {
   console.log(socket.id)
-  const currentChat = await Chats.findAll()
-  socket.emit('retrive-chat', currentChat)
+  // const currentChat = await Chats.findAll()
+  // socket.emit('retrive-chat', currentChat)
 
   socket.on('send-message', async (message, username) => {
     console.log(message, username)
-    // ChatController(Chats).addMessage
     await Chats.create({
       message,
       user: username
