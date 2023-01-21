@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       // One user can have Many Posts (1-M)
-      this.hasMany(models.Post, {foreignKey: "user_id"});
+      this.hasMany(models.Post, { foreignKey: "user_id" });
 
       // One user can have Many Comments (1-M)
-      this.hasMany(models.Comment, {foreignKey: "post_id"})
+      this.hasMany(models.Comment, { foreignKey: "post_id" });
 
       // User can favorite many posts
       this.belongsToMany(models.Post, {
@@ -22,13 +22,23 @@ module.exports = (sequelize, DataTypes) => {
         as: "favorites",
         foreignKey: "user_id",
         timestamps: false,
-      })
+      });
 
       this.belongsToMany(models.Post, {
         through: "Users_Likes",
         foreignKey: "user_id",
-        timestamps: false
-      })
+        timestamps: false,
+      });
+    }
+
+    toJSON() {
+      return {
+        ...this.get(),
+        id: undefined,
+        password: undefined,
+        updatedAt: undefined,
+        createdAt: undefined,
+      };
     }
   }
   User.init({
