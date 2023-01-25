@@ -7,39 +7,25 @@ module.exports = {
       "Tags",
       [
         {
-          tag_name: "apple",
-          created_at: new Date(),
-          updated_at: new Date(),
+          name: "apple",
         },
         {
-          tag_name: "banana",
-          created_at: new Date(),
-          updated_at: new Date(),
+          name: "banana",
         },
         {
-          tag_name: "Chinese New Year",
-          created_at: new Date(),
-          updated_at: new Date(),
+          name: "Chinese New Year",
         },
         {
-          tag_name: "Singapore",
-          created_at: new Date(),
-          updated_at: new Date(),
+          name: "Singapore",
         },
         {
-          tag_name: "Rekt",
-          created_at: new Date(),
-          updated_at: new Date(),
+          name: "Rekt",
         },
         {
-          tag_name: "SG Snowing",
-          created_at: new Date(),
-          updated_at: new Date(),
+          name: "SG Snowing",
         },
         {
-          tag_name: "Yishun",
-          created_at: new Date(),
-          updated_at: new Date(),
+          name: "Yishun",
         },
       ],
       {}
