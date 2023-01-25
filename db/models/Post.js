@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       // Tag list
       this.belongsToMany(models.Tag, {
         through: "TagList",
-        as: "tagLists",
+        as: "tagList",
         foreignKey: "post_id",
       });
 
