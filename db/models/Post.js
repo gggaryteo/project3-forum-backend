@@ -21,21 +21,18 @@ module.exports = (sequelize, DataTypes) => {
         through: "TagList",
         as: "tagList",
         foreignKey: "post_id",
-        timestamps: false,
       });
 
       // Favorites
       this.belongsToMany(models.User, {
         through: "Favorites",
         foreignKey: "post_id",
-        timestamps: false,
       });
 
       // Users_Likes
       this.belongsToMany(models.User, {
         through: "Users_Likes",
         foreignKey: "post_id",
-        timestamps: false,
       });
     }
   }

@@ -11,7 +11,7 @@ const {
 // Register
 const signUp = async (req, res, next) => {
   try {
-    console.log(req.body.user)
+    console.log(req.body.user);
     const { username, email, password, biography, profileimg } = req.body.user;
     if (!username) throw new FieldRequiredError(`A username`);
     if (!email) throw new FieldRequiredError(`An email`);
@@ -21,7 +21,7 @@ const signUp = async (req, res, next) => {
       where: { email: req.body.user.email },
     });
     if (userExists) throw new AlreadyTakenError("Email", "try logging in");
-    
+
     const newUser = await User.create({
       email: email,
       username: username,
@@ -57,4 +57,16 @@ const signIn = async (req, res, next) => {
   }
 };
 
-module.exports = { signUp, signIn };
+const getOne = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByPk(id);
+    const username = user.username;
+    const userimg = user.profileimg;
+    return res.json({ username, userimg });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { signUp, signIn, getOne };
