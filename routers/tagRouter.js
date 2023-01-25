@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 class tagRouter {
-  constructor(controller, auth) {
+  constructor(controller) {
     this.controller = controller;
-    this.auth = auth;
   }
 
   routes() {

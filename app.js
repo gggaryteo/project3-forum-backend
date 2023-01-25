@@ -23,7 +23,7 @@ const JunctionController = require("./controllers/junctionController");
 
 // initialize controllers
 const postController = new PostController(Post, User);
-const tagController = new TagController(Tag);
+const tagController = new TagController(Tag, Post);
 const chatController = new ChatController(Chats);
 const junctionController = new JunctionController(User, Post);
 
