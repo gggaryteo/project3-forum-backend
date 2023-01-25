@@ -21,14 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         through: "Favorites",
         as: "favorites",
         foreignKey: "user_id",
-        timestamps: false,
       });
 
       this.belongsToMany(models.Post, {
         through: "Users_Likes",
         as: "likes",
         foreignKey: "user_id",
-        timestamps: false,
       });
     }
 

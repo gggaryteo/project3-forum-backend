@@ -19,13 +19,13 @@ const { User, Post, Tag, Comment, Chats } = db;
 const PostController = require("./controllers/postController");
 const TagController = require("./controllers/tagController");
 const ChatController = require("./controllers/chatController");
-const UserLikeController = require("./controllers/userlikeController");
+const JunctionController = require("./controllers/junctionController");
 
 // initialize controllers
 const postController = new PostController(Post, User);
 const tagController = new TagController(Tag);
 const chatController = new ChatController(Chats);
-const userlikeController = new UserLikeController(User, Post);
+const junctionController = new JunctionController(User, Post);
 
 // import routers
 const usersRoutes = require("./routers/users");
@@ -34,14 +34,13 @@ const PostRouter = require("./routers/postRouter");
 const TagRouter = require("./routers/tagRouter");
 const postsRoutes = require("./routers/posts");
 const ChatRouter = require("./routers/chatRouter");
-const UserLikeRouter = require("./routers/userlikeRouter");
-const junctionRoutes = require("./routers/junction");
+const JunctionRouter = require("./routers/junctionRouter");
 
 // initialize routers // Have not put in AUTH yet
 const postRouter = new PostRouter(postController).routes();
 const tagRouter = new TagRouter(tagController).routes();
 const chatRouter = new ChatRouter(chatController).routes();
-const userlikeRouter = new UserLikeRouter(userlikeController).routes();
+const junctionRouter = new JunctionRouter(junctionController).routes();
 
 // Putting express & cors together below this line
 const app = express();
@@ -53,10 +52,9 @@ app.use(express.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 3001;
 
 // Routes
-app.use("/api/junction", junctionRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/user", userRoutes);
-app.use("/api/userlike", userlikeRouter);
+app.use("/api/userpost", junctionRouter);
 app.use("/api/post", postRouter);
 app.use("/api/tag", tagRouter);
 app.use("/api/posts", postsRoutes);
