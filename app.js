@@ -35,6 +35,7 @@ const TagRouter = require("./routers/tagRouter");
 const postsRoutes = require("./routers/posts");
 const ChatRouter = require("./routers/chatRouter");
 const JunctionRouter = require("./routers/junctionRouter");
+const profilesRoutes = require("./routers/profiles");
 
 // initialize routers // Have not put in AUTH yet
 const postRouter = new PostRouter(postController).routes();
@@ -59,6 +60,10 @@ app.use("/api/post", postRouter);
 app.use("/api/tag", tagRouter);
 app.use("/api/posts", postsRoutes);
 app.use("/api/chat", chatRouter);
+app.use("/api/profiles", profilesRoutes);
+app.get("*", (req, res) =>
+  res.status(404).json({ errors: { body: ["Not found"] } })
+);
 app.use(errorHandler);
 
 // Socket.io
