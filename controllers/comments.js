@@ -73,7 +73,7 @@ const deleteComment = async (req, res, next) => {
     const comment = await Comment.findByPk(commentId);
     if (!comment) throw new NotFoundError("Comment");
 
-    if (loggedUser.id !== comment.userId) {
+    if (loggedUser.id !== comment.user_id) {
       throw new ForbiddenError("comment");
     }
 
