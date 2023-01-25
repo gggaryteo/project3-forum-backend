@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 class postRouter {
-  constructor(controller, auth) {
+  constructor(controller) {
     this.controller = controller;
-    this.auth = auth;
   }
 
   routes() {
@@ -12,6 +11,12 @@ class postRouter {
 
     // http://localhost:3001/api/post/getAll
     router.get("/getAll", this.controller.getAllPost.bind(this.controller));
+
+    //http://localhost:3001/api/post/:currentUserEmail
+    router.get(
+      "/:user_email",
+      this.controller.getUserPost.bind(this.controller)
+    );
 
     // router.use(this.auth);
 
