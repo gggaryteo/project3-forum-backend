@@ -3,9 +3,9 @@ const {
   UnauthorizedError,
   FieldRequiredError,
   ForbiddenError,
-} = require("../helper/customErrors");
-const { appendFollowers } = require("../helper/helpers");
-const { Post, Comment, User } = require("../models");
+} = require("../helpers/customError");
+// const { appendFollowers } = require("../helpers/helpers");
+const { Post, Comment, User } = require("../db/models")
 
 //? All Comments for Post
 const allComments = async (req, res, next) => {
@@ -22,9 +22,9 @@ const allComments = async (req, res, next) => {
       ],
     });
 
-    for (const comment of comments) {
-      await appendFollowers(loggedUser, comment);
-    }
+    // for (const comment of comments) {
+    //   await appendFollowers(loggedUser, comment);
+    // }
 
     res.json({ comments });
   } catch (error) {
@@ -34,26 +34,27 @@ const allComments = async (req, res, next) => {
 
 //* Create Comment for Post
 const createComment = async (req, res, next) => {
+  console.log(req.body.comment)
   try {
     const { loggedUser } = req;
     if (!loggedUser) throw new UnauthorizedError();
 
-    const { body } = req.body.comment;
-    if (!body) throw new FieldRequiredError("Comment body");
+    const { content } = req.body.comment;
+    if (!content) throw new FieldRequiredError("Comment content");
 
     const { slug } = req.params;
     const post = await Post.findOne({ where: { slug: slug } });
     if (!post) throw new NotFoundError("Post");
 
     const comment = await Comment.create({
-      body: body,
-      postId: post.id,
-      userId: loggedUser.id,
+      content: content,
+      post_id: post.id,
+      user_id: loggedUser.id,
     });
 
     delete loggedUser.dataValues.token;
     comment.dataValues.author = loggedUser;
-    await appendFollowers(loggedUser, loggedUser);
+    // await appendFollowers(loggedUser, loggedUser);
 
     res.status(201).json({ comment });
   } catch (error) {

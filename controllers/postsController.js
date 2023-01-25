@@ -6,7 +6,6 @@ const {
 } = require("../helpers/helpers");
 
 const { Post, Tag, User } = require("../db/models");
-const { post } = require("../routers/users");
 
 const includeOptions = [
   { model: Tag, as: "tagList", attributes: ["name"] },
@@ -18,7 +17,7 @@ const includeOptions = [
 const allPosts = async (req, res, next) => {
   try {
     const { loggedUser } = req;
-    const { author, tag, favorited, limit = 3, offset = 0} = req.query;
+    const { author, tag, limit = 3, offset = 0} = req.query;
     const searchOptions = {
       include: [
         {
@@ -39,20 +38,12 @@ const allPosts = async (req, res, next) => {
       order: [["createdAt", "DESC"]],
     };
 
-    let posts =  { rows: [], count : 0 };
-    if (favorited) {
-      const user = await User.findOne({ where:  { username: favorited }});
-      
-      posts.rows = await user.getFavorites(searchOptions);
-      posts.count = await user.countFavorites();
-    } else {
-      posts = await Post.findAndCountAll(searchOptions);
-    }
+      const posts = await Post.findAndCountAll(searchOptions);
 
-    for ( let post of posts.rows) {
-      const postTags = await post.getTagList();
-      appendTagList(postTags, post);
-    }
+    // for ( let post of posts.rows) {
+    //   const postTags = await post.getTagList();
+    //   appendTagList(postTags, post);
+    // }
 
     res.json({ posts: posts.rows, postsCount: posts.count });
   } catch(err) {
@@ -108,9 +99,27 @@ const createPost = async (req, res, next) => {
   }
 };
 
+// Single Post by slug
+const singlePost = async (req, res, next) => {
+  try {
+    const { loggedUser } = req;
+
+    const { slug } = req.params;
+    const post = await Post.findOne({
+      where: { slug: slug },
+      include: includeOptions,
+    });
+    if (!post) throw new NotFoundError("Post");
+
+    res.json({ post });
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 module.exports = {
   allPosts,
-  createPost
+  createPost,
+  singlePost
 }
