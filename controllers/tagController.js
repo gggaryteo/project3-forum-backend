@@ -1,20 +1,27 @@
 const BaseController = require("./baseController");
 
-class PostController extends BaseController {
-  constructor(model) {
+class TagController extends BaseController {
+  constructor(model, post) {
     super(model);
+    this.post = post;
   }
 
   async getAllTag(req, res) {
     try {
-      const posts = await this.model.findAll({
-        attributes: ["tag_name"],
+      const test = await this.model.findAll({
+        include: [
+          {
+            model: this.post,
+            through: "TagList",
+            as: "taglist",
+          },
+        ],
       });
-      return res.json(posts);
+      return res.json(test);
     } catch (err) {
       console.log(err);
     }
   }
 }
 
-module.exports = PostController;
+module.exports = TagController;
